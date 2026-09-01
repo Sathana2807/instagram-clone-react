@@ -1,0 +1,159 @@
+{
+  "posts": [
+    {
+      "id": "1",
+      "user": {
+        "id": 101,
+        "username": "john_doe",
+        "profile_pic": "./src/assets/profile1.jpg"
+      },
+      "image": "./src/assets/post1.jpg",
+      "caption": "Beautiful sunset 🌅 #Nature",
+      "likes": 120,
+      "comments": [
+        {
+          "user": "alice_wonder",
+          "comment": "Wow! Amazing shot! 😍"
+        },
+        {
+          "user": "mike_smith",
+          "comment": "Where is this place?"
+        }
+      ],
+      "timestamp": "2026-08-29T10:00:00.000Z"
+    },
+    {
+      "id": "2",
+      "user": {
+        "id": 102,
+        "username": "divya_priya",
+        "profile_pic": "./src/assets/profile2.jpg"
+      },
+      "image": "./src/assets/post2.jpg",
+      "caption": "Homemade pasta night 🍝",
+      "likes": 218,
+      "comments": [
+        {
+          "user": "karthik_raja",
+          "comment": "Looks delicious!"
+        },
+        {
+          "user": "meena_s",
+          "comment": "Recipe pls 😍"
+        }
+      ],
+      "timestamp": "2026-09-29T10:00:00.000Z"
+    },
+    {
+      "id": "3",
+      "user": {
+        "id": 103,
+        "username": "karthik_raja",
+        "profile_pic": "./src/assets/profile3.jpg"
+      },
+      "image": "./src/assets/post3.jpg",
+      "caption": "Misty mornings in Ooty 🌫️",
+      "likes": 567,
+      "comments": [
+        {
+          "user": "meena_s",
+          "comment": "Take me with you next time!"
+        },
+        {
+          "user": "vignesh_a",
+          "comment": "Beautiful 🔥"
+        }
+      ],
+      "timestamp": "2025-08-29T10:00:00.000Z"
+    }
+  ],
+  "profile": {
+    "id": 101,
+    "username": "hiii123",
+    "profile_pic": "./src/assets/s1.jpg"
+  },
+  "suggestion": [
+    {
+      "id": "101",
+      "username": "john_doe",
+      "profile_pic": "./src/assets/profile1.jpg"
+    },
+    {
+      "id": "102",
+      "username": "divya_priya",
+      "profile_pic": "./src/assets/profile2.jpg"
+    },
+    {
+      "id": "103",
+      "username": "karthik_raja",
+      "profile_pic": "./src/assets/profile3.jpg"
+    },
+    {
+      "id": "104",
+      "username": "raja",
+      "profile_pic": "./src/assets/profile3.jpg"
+    },
+    {
+      "id": "105",
+      "username": "karthik_doe",
+      "profile_pic": "./src/assets/profile3.jpg"
+    }
+  ],
+  "story": [
+    {
+      "id": "1",
+      "user": {
+        "id": 101,
+        "username": "john_doe",
+        "profile_pic": "./src/assets/profile1.jpg"
+      },
+      "image": "/src/assets/s1.jpg"
+    },
+    {
+      "id": "2",
+      "user": {
+        "id": 102,
+        "username": "divya_priya",
+        "profile_pic": "./src/assets/profile2.jpg"
+      },
+      "image": "/src/assets/s2.jpg"
+    },
+    {
+      "id": "3",
+      "user": {
+        "id": 103,
+        "username": "karthik_raja",
+        "profile_pic": "./src/assets/profile3.jpg"
+      },
+      "image": "/src/assets/s3.jpg"
+    }
+  ],
+  "follower": [
+    {
+      "id": "101",
+      "username": "john_doe",
+      "profile_pic": "./src/assets/profile1.jpg"
+    },
+    {
+      "id": "Iag03Pcxi1E",
+      "username": "karthik_doe"
+    },
+    {
+      "id": "onLSOoZAxaQ",
+      "username": "raja"
+    },
+    {
+      "id": "b5qnlyGBkXg",
+      "username": "john_doe"
+    },
+    {
+      "id": "e4Wz7VquC_s",
+      "username": "karthik_doe"
+    },
+    {
+      "id": "xrlPR3Fdw_k",
+      "username": "john_doe"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
