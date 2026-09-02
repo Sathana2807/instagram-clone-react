@@ -2,10 +2,17 @@ import React, { useEffect, useState } from 'react'
 import db from '../db/db.json'
 
 function Profile() {
+
   const [profile, setProfile] = useState(null)
   const [follower, setFollower] = useState([])
 
+  const [following, setFollowing] = useState(() => {
+    const saved = localStorage.getItem("following")
+    return saved ? JSON.parse(saved) : []
+  })
+
   useEffect(() => {
+
     const savedProfile = localStorage.getItem("profile")
 
     if (savedProfile) {
@@ -15,35 +22,60 @@ function Profile() {
     }
 
     setFollower(db.follower)
+
   }, [])
 
   function HandleOnChange(e) {
+
     setProfile((prev) => ({
       ...prev,
       [e.target.name]: e.target.value
     }))
+
   }
 
   const handleUpdata = () => {
-    localStorage.setItem("profile", JSON.stringify(profile))
+
+    localStorage.setItem(
+      "profile",
+      JSON.stringify(profile)
+    )
+
     alert("Updated")
   }
 
   const handleUnfollow = (id) => {
-    setFollower((prev) =>
-      prev.filter((item) => item.id !== id)
-    )
 
-    alert("unfollow")
+    setFollowing((prev) => {
+
+      const newFollowing = prev.filter(
+        (item) => item.id !== id
+      )
+
+      localStorage.setItem(
+        "following",
+        JSON.stringify(newFollowing)
+      )
+
+      return newFollowing
+    })
+
+    alert("Unfollowed")
   }
 
   return (
-    <div className='m-3'>
+    <div className="m-3">
+
+      {/* PROFILE */}
 
       {profile ? (
         <div>
+
           <img
-            src={import.meta.env.BASE_URL + profile.profile_pic}
+            src={
+              import.meta.env.BASE_URL +
+              profile.profile_pic
+            }
             className="profile rounded-circle"
             alt="profile"
           />
@@ -72,33 +104,82 @@ function Profile() {
           >
             update
           </button>
+
         </div>
       ) : (
-        <div>
-          loading profile
-        </div>
+        <div>loading profile</div>
       )}
 
-      {follower.length > 0 ? (
-        follower.map((follower) => (
+
+      {/* FOLLOWING */}
+
+      <h4 className="mt-4">Following</h4>
+
+      {following.length > 0 ? (
+
+        following.map((user) => (
+
           <div
-            key={follower.id}
-            className='d-flex my-2'
+            key={user.id}
+            className="d-flex my-2 align-items-center"
           >
-            {follower.username}
+
+            <img
+              src={
+                import.meta.env.BASE_URL +
+                user.profile_pic
+              }
+              className="dp rounded-circle"
+              alt="profile"
+            />
+
+            <h5 className="ms-2 mb-0">
+              {user.username}
+            </h5>
 
             <button
               className="btn btn-secondary ms-auto"
-              onClick={() => handleUnfollow(follower.id)}
+              onClick={() =>
+                handleUnfollow(user.id)
+              }
             >
-              unfollow
+              Unfollow
             </button>
+
           </div>
+
         ))
+
       ) : (
-        <div>
-          loading follower
-        </div>
+
+        <p>No following</p>
+
+      )}
+
+
+      {/* FOLLOWERS */}
+
+      <h4 className="mt-4">Followers</h4>
+
+      {follower.length > 0 ? (
+
+        follower.map((item) => (
+
+          <div
+            key={item.id}
+            className="d-flex my-2"
+          >
+
+            {item.username}
+
+          </div>
+
+        ))
+
+      ) : (
+
+        <div>loading follower</div>
+
       )}
 
     </div>
