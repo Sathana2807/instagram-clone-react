@@ -8,7 +8,7 @@ function Viewstories() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    const data = db.story.find((item) => item.id === id)
+    const data = db.story.find((item) => String(item.id) === String(id))
     setStory(data)
   }, [id])
 
