@@ -6,7 +6,14 @@ function Profile() {
   const [follower, setFollower] = useState([])
 
   useEffect(() => {
-    setProfile(db.profile)
+    const savedProfile = localStorage.getItem("profile")
+
+    if (savedProfile) {
+      setProfile(JSON.parse(savedProfile))
+    } else {
+      setProfile(db.profile)
+    }
+
     setFollower(db.follower)
   }, [])
 
@@ -18,6 +25,7 @@ function Profile() {
   }
 
   const handleUpdata = () => {
+    localStorage.setItem("profile", JSON.stringify(profile))
     alert("Updated")
   }
 
@@ -25,6 +33,7 @@ function Profile() {
     setFollower((prev) =>
       prev.filter((item) => item.id !== id)
     )
+
     alert("unfollow")
   }
 
@@ -87,7 +96,9 @@ function Profile() {
           </div>
         ))
       ) : (
-        <div>loading follower</div>
+        <div>
+          loading follower
+        </div>
       )}
 
     </div>
