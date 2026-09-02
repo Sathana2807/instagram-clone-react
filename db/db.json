@@ -5,9 +5,9 @@
       "user": {
         "id": 101,
         "username": "john_doe",
-        "profile_pic": "./src/assets/profile1.jpg"
+        "profile_pic": "/instagram-clone-react/assets/profile1.jpg"
       },
-      "image": "./src/assets/post1.jpg",
+      "image": "/instagram-clone-react/assets/post1.jpg",
       "caption": "Beautiful sunset 🌅 #Nature",
       "likes": 120,
       "comments": [
@@ -27,9 +27,9 @@
       "user": {
         "id": 102,
         "username": "divya_priya",
-        "profile_pic": "./src/assets/profile2.jpg"
+        "profile_pic": "/instagram-clone-react/assets/profile2.jpg"
       },
-      "image": "./src/assets/post2.jpg",
+      "image": "/instagram-clone-react/assets/post2.jpg",
       "caption": "Homemade pasta night 🍝",
       "likes": 218,
       "comments": [
@@ -49,9 +49,9 @@
       "user": {
         "id": 103,
         "username": "karthik_raja",
-        "profile_pic": "./src/assets/profile3.jpg"
+        "profile_pic": "/instagram-clone-react/assets/profile3.jpg"
       },
-      "image": "./src/assets/post3.jpg",
+      "image": "/instagram-clone-react/assets/post3.jpg",
       "caption": "Misty mornings in Ooty 🌫️",
       "likes": 567,
       "comments": [
@@ -70,33 +70,33 @@
   "profile": {
     "id": 101,
     "username": "hiii123",
-    "profile_pic": "./src/assets/s1.jpg"
+    "profile_pic": "/instagram-clone-react/assets/s1.jpg"
   },
   "suggestion": [
     {
       "id": "101",
       "username": "john_doe",
-      "profile_pic": "./src/assets/profile1.jpg"
+      "profile_pic": "/instagram-clone-react/assets/profile1.jpg"
     },
     {
       "id": "102",
       "username": "divya_priya",
-      "profile_pic": "./src/assets/profile2.jpg"
+      "profile_pic": "/instagram-clone-react/assets/profile2.jpg"
     },
     {
       "id": "103",
       "username": "karthik_raja",
-      "profile_pic": "./src/assets/profile3.jpg"
+      "profile_pic": "/instagram-clone-react/assets/profile3.jpg"
     },
     {
       "id": "104",
       "username": "raja",
-      "profile_pic": "./src/assets/profile3.jpg"
+      "profile_pic": "/instagram-clone-react/assets/profile3.jpg"
     },
     {
       "id": "105",
       "username": "karthik_doe",
-      "profile_pic": "./src/assets/profile3.jpg"
+      "profile_pic": "/instagram-clone-react/assets/profile3.jpg"
     }
   ],
   "story": [
@@ -105,34 +105,34 @@
       "user": {
         "id": 101,
         "username": "john_doe",
-        "profile_pic": "./src/assets/profile1.jpg"
+        "profile_pic": "/instagram-clone-react/assets/profile1.jpg"
       },
-      "image": "/src/assets/s1.jpg"
+      "image": "/instagram-clone-react/assets/s1.jpg"
     },
     {
       "id": "2",
       "user": {
         "id": 102,
         "username": "divya_priya",
-        "profile_pic": "./src/assets/profile2.jpg"
+        "profile_pic": "/instagram-clone-react/assets/profile2.jpg"
       },
-      "image": "/src/assets/s2.jpg"
+      "image": "/instagram-clone-react/assets/s2.jpg"
     },
     {
       "id": "3",
       "user": {
         "id": 103,
         "username": "karthik_raja",
-        "profile_pic": "./src/assets/profile3.jpg"
+        "profile_pic": "/instagram-clone-react/assets/profile3.jpg"
       },
-      "image": "/src/assets/s3.jpg"
+      "image": "/instagram-clone-react/assets/s3.jpg"
     }
   ],
   "follower": [
     {
       "id": "101",
       "username": "john_doe",
-      "profile_pic": "./src/assets/profile1.jpg"
+      "profile_pic": "/instagram-clone-react/assets/profile1.jpg"
     },
     {
       "id": "Iag03Pcxi1E",
