@@ -19,7 +19,10 @@ const router= createBrowserRouter(
       path:'/profile',
       element:<Profile/>
     }
-  ]
+  ],
+  {
+    basename:'/instagram-clone-react'
+  }
 )
 createRoot(document.getElementById('root')).render(
    <RouterProvider router={router}/>
