@@ -5,8 +5,17 @@ function Suggestion() {
   const [profile, setProfile] = useState(null)
   const [suggestions, setSuggestions] = useState([])
 
-  const handleFollow = (id, username) => {
-    alert('followed')
+  const [following, setFollowing] = useState(() => {
+    const saved = localStorage.getItem("following")
+    return saved ? JSON.parse(saved) : []
+  })
+
+  const handleFollow = (id) => {
+    setFollowing((prev) => {
+      const newFollowing = [...prev, id]
+      localStorage.setItem("following", JSON.stringify(newFollowing))
+      return newFollowing
+    })
   }
 
   useEffect(() => {
@@ -55,6 +64,7 @@ function Suggestion() {
 
         {suggestions.length > 0 ? (
           <div>
+
             {suggestions.map((suggestion) => (
               <div
                 className="my-1"
@@ -73,21 +83,21 @@ function Suggestion() {
 
                   <h5>{suggestion.username}</h5>
 
-                  <a
-                    className="ms-auto text-primary"
+                  <button
+                    className="ms-auto btn btn-link text-primary"
                     onClick={() =>
-                      handleFollow(
-                        suggestion.id,
-                        suggestion.username
-                      )
+                      handleFollow(suggestion.id)
                     }
                   >
-                    Follow
-                  </a>
+                    {following.includes(suggestion.id)
+                      ? "Following"
+                      : "Follow"}
+                  </button>
 
                 </div>
               </div>
             ))}
+
           </div>
         ) : (
           <div>
