@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import db from ''../db/db.json'
+import db from '../db/db.json'
 function Posts() {
 
     const[posts,setPosts]=useState([])
