@@ -176,7 +176,7 @@ function Posts() {
                      className="btn btn-primary"
                      onClick={() => handleComment(post.id)}
                     >
-                        Post
+                        send
                     </button>
 
                 </div>
