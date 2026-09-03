@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 function Sidebar() {
   const navigate=useNavigate()
   return (
-    <div className="m-3 position-fixed">
+    <div className="m-3 position-fixed" style={{cursor: 'pointer'}}>
         <div className="d-flex flex-column gap-3">
             <img className="logo-text" src="./src/assets/text-insta.png" alt=''/>
             <div><i className="bi bi-house-door"></i>Home</div>
