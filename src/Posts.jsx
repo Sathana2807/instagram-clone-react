@@ -1,161 +1,204 @@
 import React, { useEffect, useState } from 'react'
 import db from '../db/db.json'
 
-function Profile() {
+function Posts() {
 
-  const [profile, setProfile] = useState(null)
-  const [follower, setFollower] = useState([])
+    const [posts, setPosts] = useState([])
 
-  const [following, setFollowing] = useState(() => {
-    const saved = localStorage.getItem("following")
-    return saved ? JSON.parse(saved) : []
-  })
+    useEffect(() => {
+        const savedPosts = localStorage.getItem('instagramPosts')
 
-  useEffect(() => {
+        if (savedPosts) {
+            setPosts(JSON.parse(savedPosts))
+        } else {
+            setPosts(
+                db.posts.map((post) => ({
+                    ...post,
+                    liked: false
+                }))
+            )
+        }
+    }, [])
 
-    const savedProfile = localStorage.getItem("profile")
+    useEffect(() => {
+        if (posts.length > 0) {
+            localStorage.setItem(
+                'instagramPosts',
+                JSON.stringify(posts)
+            )
+        }
+    }, [posts])
 
-    if (savedProfile) {
-      setProfile(JSON.parse(savedProfile))
-    } else {
-      setProfile(db.profile)
+    const handleHeartClick = (id) => {
+        setPosts(posts.map((post) =>
+            post.id === id
+                ? { ...post, liked: !post.liked }
+                : post
+        ))
     }
 
-    setFollower(db.follower)
+    const handleDoubleClick = (id) => {
+        setPosts(posts.map((post) =>
+            post.id === id
+                ? { ...post, liked: true }
+                : post
+        ))
+    }
 
-  }, [])
+    const handleCommentChange = (id, value) => {
+        setPosts(posts.map((post) =>
+            post.id === id
+                ? { ...post, commentInput: value }
+                : post
+        ))
+    }
 
-  function HandleOnChange(e) {
+    const handleComment = (id) => {
 
-    setProfile((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }))
+        const savedProfile = localStorage.getItem("profile")
 
-  }
+        const currentProfile = savedProfile
+            ? JSON.parse(savedProfile)
+            : db.profile
 
-  const handleUpdata = () => {
+        setPosts(posts.map((post) => {
 
-    localStorage.setItem(
-      "profile",
-      JSON.stringify(profile)
-    )
+            if (post.id === id && post.commentInput?.trim()) {
 
-    alert("Updated")
-  }
-
-  const handleUnfollow = (id) => {
-
-    setFollowing((prev) => {
-
-      const newFollowing = prev.filter(
-        (item) => item.id !== id
-      )
-
-      localStorage.setItem(
-        "following",
-        JSON.stringify(newFollowing)
-      )
-
-      return newFollowing
-    })
-
-    alert("Unfollowed")
-  }
-
-  return (
-    <div className="m-3">
-
-      {profile ? (
-        <div>
-
-          <img
-            src={
-              import.meta.env.BASE_URL +
-              profile.profile_pic
+                return {
+                    ...post,
+                    comments: [
+                        ...(post.comments || []),
+                        {
+                            user: currentProfile.username,
+                            comment: post.commentInput.trim()
+                        }
+                    ],
+                    commentInput: ''
+                }
             }
-            className="profile rounded-circle"
-            alt="profile"
-          />
 
-          <h5>{profile.username}</h5>
+            return post
+        }))
+    }
 
-          <input
-            type="text"
-            name="username"
-            value={profile.username}
-            className="form-control my-4"
-            onChange={HandleOnChange}
-          />
+    return (
+        <div className="d-flex justify-content-center">
 
-          <input
-            type="text"
-            name="profile_pic"
-            value={profile.profile_pic}
-            className="form-control"
-            onChange={HandleOnChange}
-          />
+            {posts.length > 0 ? (
 
-          <button
-            className="btn btn-primary my-4"
-            onClick={handleUpdata}
-          >
-            update
-          </button>
+            <div>
 
-        </div>
-      ) : (
-        <div>loading profile</div>
-      )}
+            {posts.map((post) => (
 
-      <h4 className="mt-4">Following</h4>
-      {following.length > 0 ? (
-        following.map((user) => (
-          <div
-            key={user.id}
-            className="d-flex my-2 align-items-center"
-          >
+            <div className="my-3" key={post.id}>
+
+            <div className="d-flex">
+
             <img
-              src={
-                import.meta.env.BASE_URL +
-                user.profile_pic
-              }
-              className="dp rounded-circle"
-              alt="profile"
+             className="dp rounded-circle"
+             src={import.meta.env.BASE_URL + post.user.profile_pic}
+             alt="profile pic"/>
+
+            <h5>{post.user.username}</h5>
+
+            </div>
+
+            <img
+             className="image"
+             src={import.meta.env.BASE_URL + post.image}
+             alt="post"
+             onDoubleClick={() => handleDoubleClick(post.id)}
             />
 
-            <h5 className="ms-2 mb-0">
-              {user.username}
-            </h5>
+            <div>
 
-            <button
-              className="btn btn-secondary ms-auto"
-              onClick={() =>
-                handleUnfollow(user.id)
-              }
-            >
-              Unfollow
-            </button>
-          </div>
-        ))
-      ) : (
-        <p>No following</p>
-      )}
+                <i
+                 className={`bi ${post.liked ? 'bi-heart-fill text-danger' : 'bi-heart'}`}
+                 onClick={() => handleHeartClick(post.id)}
+                 style={{cursor: 'pointer'}}
+                ></i>
 
-      <h4 className="mt-4">Followers</h4>
-      {follower.length > 0 ? (
-        follower.map((item) => (
-          <div
-            key={item.id}
-            className="d-flex my-2"
-          >
-            {item.username}
-          </div>
-        ))
-      ) : (
-        <div>loading follower</div>
-      )}
-    </div>
-  )
+                <i
+                 className="bi bi-chat"
+                 onClick={() =>
+                    document
+                    .getElementById(`comment-${post.id}`)
+                    ?.focus()
+                 }
+                 style={{cursor: 'pointer'}}
+                ></i>
+
+                <i className="bi bi-send"></i>
+
+            </div>
+
+            <div>
+
+            <b>{post.likes + (post.liked ? 1 : 0)} Likes</b>
+
+            </div>
+
+            <p>{post.caption}</p>
+
+            <div>
+
+                {post.comments?.map((comment, index) => (
+
+                    <p key={index}>
+                        <b>{comment.user}:</b> {comment.comment}
+                    </p>
+
+                ))}
+
+                <div className="d-flex">
+
+                    <input
+                     id={`comment-${post.id}`}
+                     type="text"
+                     placeholder="Add a comment..."
+                     value={post.commentInput || ''}
+                     onChange={(e) =>
+                        handleCommentChange(
+                            post.id,
+                            e.target.value
+                        )
+                     }
+                     onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                            handleComment(post.id)
+                        }
+                     }}
+                     className="form-control"
+                    />
+
+                    <button
+                     className="btn btn-primary"
+                     onClick={() => handleComment(post.id)}
+                    >
+                        Post
+                    </button>
+
+                </div>
+
+            </div>
+
+            </div>
+
+            ))}
+
+            </div>
+
+            ) : (
+
+            <div>
+                loading posts
+            </div>
+
+            )}
+
+        </div>
+    )
 }
-export default Profile
+
+export default Posts
