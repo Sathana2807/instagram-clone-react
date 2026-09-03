@@ -61,7 +61,7 @@ function Posts() {
                     comments: [
                         ...(post.comments || []),
                         {
-                            user: 'hiii123',
+                            user: db.profile.username,
                             comment: post.commentInput.trim()
                         }
                     ],
